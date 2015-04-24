@@ -1,0 +1,209 @@
+#
+# This is the bash auto complete script for the origin project
+#
+
+_openshift()
+{
+    local cur opts prev
+    COMPREPLY=()
+    cur="${CPMP_WORDS[COMP_CWORD]}"
+    if [ $COMP_CWORD -eq 1 ]; then
+        if [[ "$cur" == -* ]]; then
+            opts="--clean"
+        elif [ -z $cur ]; then
+            opts="start admin cli kube ex version help"
+        else
+            opts="start admin cli kube ex version help"
+        fi
+    else
+        prev="${COMP_WORDS[@]:0:COMP_CWORD}"
+        SAVE_IFS=$IFS
+        IFS=" "
+        case "${prev[*]}" in
+            "openshift start")
+                if [[ "$cur" == -* ]]; then
+                    opts=""
+                else
+                    opts=""
+                fi
+            ;;
+        esac
+        IFS=$SAVE_IFS
+    fi
+
+    COMPREPLY=( $(compgen -W "${opts}" -- ${cur}))
+    return 0
+}
+
+complete -o default -F _openshift openshift
+
+
+_osc()
+{
+    local cur opts prev
+    COMPREPLY=()
+    cur="${CPMP_WORDS[COMP_CWORD]}"
+    if [ $COMP_CWORD -eq 1 ]; then
+        if [[ "$cur" == -* ]]; then
+            opts="--clean"
+        elif [ -z $cur ]; then
+            opts=""
+        else
+            opts=""
+        fi
+    else
+        prev="${COMP_WORDS[@]:0:COMP_CWORD}"
+        SAVE_IFS=$IFS
+        IFS=" "
+        case "${prev[*]}" in
+        esac
+        IFS=$SAVE_IFS
+    fi
+
+    COMPREPLY=( $(compgen -W "${opts}" -- ${cur}))
+    return 0
+}
+
+complete -o default -F _osc osc
+
+_osadm()
+{
+    local cur opts prev
+    COMPREPLY=()
+    cur="${CPMP_WORDS[COMP_CWORD]}"
+    if [ $COMP_CWORD -eq 1 ]; then
+        if [[ "$cur" == -* ]]; then
+            opts="--clean"
+        elif [ -z $cur ]; then
+            opts=""
+        else
+            opts=""
+        fi
+    else
+        prev="${COMP_WORDS[@]:0:COMP_CWORD}"
+        SAVE_IFS=$IFS
+        IFS=" "
+        case "${prev[*]}" in
+        esac
+        IFS=$SAVE_IFS
+    fi
+
+    COMPREPLY=( $(compgen -W "${opts}" -- ${cur}))
+    return 0
+}
+
+complete -o default -F _osadm osadm
+
+_openshift_deploy()
+{
+    local cur opts prev
+    COMPREPLY=()
+    cur="${CPMP_WORDS[COMP_CWORD]}"
+    if [ $COMP_CWORD -eq 1 ]; then
+        if [[ "$cur" == -* ]]; then
+            opts="--clean"
+        elif [ -z $cur ]; then
+            opts=""
+        else
+            opts=""
+        fi
+    else
+        prev="${COMP_WORDS[@]:0:COMP_CWORD}"
+        SAVE_IFS=$IFS
+        IFS=" "
+        case "${prev[*]}" in
+        esac
+        IFS=$SAVE_IFS
+    fi
+
+    COMPREPLY=( $(compgen -W "${opts}" -- ${cur}))
+    return 0
+}
+
+complete -o default -F _openshift-deploy openshift-deploy
+
+
+_openshift-router()
+{
+    local cur opts prev
+    COMPREPLY=()
+    cur="${CPMP_WORDS[COMP_CWORD]}"
+    if [ $COMP_CWORD -eq 1 ]; then
+        if [[ "$cur" == -* ]]; then
+            opts="--clean"
+        elif [ -z $cur ]; then
+            opts=""
+        else
+            opts=""
+        fi
+    else
+        prev="${COMP_WORDS[@]:0:COMP_CWORD}"
+        SAVE_IFS=$IFS
+        IFS=" "
+        case "${prev[*]}" in
+        esac
+        IFS=$SAVE_IFS
+    fi
+
+    COMPREPLY=( $(compgen -W "${opts}" -- ${cur}))
+    return 0
+}
+
+complete -o default -F _openshift-router opensfhit-router
+
+_openshift-docker-build()
+{
+    local cur opts prev
+    COMPREPLY=()
+    cur="${CPMP_WORDS[COMP_CWORD]}"
+    if [ $COMP_CWORD -eq 1 ]; then
+        if [[ "$cur" == -* ]]; then
+            opts="--clean"
+        elif [ -z $cur ]; then
+            opts=""
+        else
+            opts=""
+        fi
+    else
+        prev="${COMP_WORDS[@]:0:COMP_CWORD}"
+        SAVE_IFS=$IFS
+        IFS=" "
+        case "${prev[*]}" in
+        esac
+        IFS=$SAVE_IFS
+    fi
+
+    COMPREPLY=( $(compgen -W "${opts}" -- ${cur}))
+    return 0
+}
+
+complete -o default -F _openshift-docker-build openshift-docker-build
+
+
+_openshift-sti-build()
+{
+    local cur opts prev
+    COMPREPLY=()
+    cur="${CPMP_WORDS[COMP_CWORD]}"
+    if [ $COMP_CWORD -eq 1 ]; then
+        if [[ "$cur" == -* ]]; then
+            opts="--clean"
+        elif [ -z $cur ]; then
+            opts=""
+        else
+            opts=""
+        fi
+    else
+        prev="${COMP_WORDS[@]:0:COMP_CWORD}"
+        SAVE_IFS=$IFS
+        IFS=" "
+        case "${prev[*]}" in
+        esac
+        IFS=$SAVE_IFS
+    fi
+
+    COMPREPLY=( $(compgen -W "${opts}" -- ${cur}))
+    return 0
+}
+
+complete -o default -F _openshift-sti-build openshift-sti-build
