@@ -833,21 +833,22 @@ _openshift()
     return 0
 }
 
-complete -o default -F _openshift openshift
+    complete -o default -F _openshift openshift
+
 
 
 _osc()
 {
     local cur opts prev
     COMPREPLY=()
-    cur="${CPMP_WORDS[COMP_CWORD]}"
+    cur="${COMP_WORDS[COMP_CWORD]}"
     if [ $COMP_CWORD -eq 1 ]; then
         if [[ "$cur" == -* ]]; then
             opts=""
         elif [ -z $cur ]; then
             opts="login project new-app status start-build cancel-build build-logs rollback get describe create process update delete log exec port-forward proxy version config help"
         else
-            opts=""
+            opts="login project new-app status start-build cancel-build build-logs rollback get describe create process update delete log exec port-forward proxy version config help"
         fi
     else
         prev="${COMP_WORDS[@]:0:COMP_CWORD}"
@@ -1058,26 +1059,238 @@ _osc()
     return 0
 }
 
-complete -o default -F _osc osc
+    complete -o default -F _osc osc
+
+
 
 _osadm()
 {
     local cur opts prev
     COMPREPLY=()
-    cur="${CPMP_WORDS[COMP_CWORD]}"
+    cur="${COMP_WORDS[COMP_CWORD]}"
     if [ $COMP_CWORD -eq 1 ]; then
         if [[ "$cur" == -* ]]; then
-            opts="--clean"
+            opts=""
         elif [ -z $cur ]; then
-            opts=""
+            opts="new-project policy router registry build-chain config create-kubeconfig create-bootstrap-policy-file overwrite-policy create-node-config create-master-certs create-api-client-config create-server-cert create-signer-cert version help"
         else
-            opts=""
+            opts="new-project policy router registry build-chain config create-kubeconfig create-bootstrap-policy-file overwrite-policy create-node-config create-master-certs create-api-client-config create-server-cert create-signer-cert version help"
         fi
     else
         prev="${COMP_WORDS[@]:0:COMP_CWORD}"
         SAVE_IFS=$IFS
         IFS=" "
         case "${prev[*]}" in
+        "osadm new-project")
+            if [[ "$cur" == -* ]];then
+                opts="--admin --admin-role --description --display-name --master-policy-namespace"
+            else
+                opts=""
+            fi
+        ;;
+        "osadm policy")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts="add-role-to-user remove-role-from-user remove-user add-role-to-group remove-role-from-group remove-group who-can"
+            fi
+        ;;
+        "osadm policy add-role-to-user")
+            if [[ "$cur" == -* ]];then
+                opts="--role-namespace"
+            else
+                opts=""
+            fi
+        ;;
+        "osadm policy remove-role-from-user")
+            if [[ "$cur" == -* ]];then
+                opts="--role-namespace"
+            else
+                opts=""
+            fi
+        ;;
+        "osadm policy remove-user")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
+        "osadm policy add-role-to-group")
+            if [[ "$cur" == -* ]];then
+                opts="--role-namespace"
+            else
+                opts=""
+            fi
+        ;;
+        "osadm policy remove-role-from-group")
+            if [[ "$cur" == -* ]];then
+                opts="--role-namespace"
+            else
+                opts=""
+            fi
+        ;;
+        "osadm policy remove-group")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
+        "osadm policy who-can")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
+        "osadm router")
+            if [[ "$cur" == -* ]];then
+                opts="--create --credentials --images --labels --latest-images --no-headers -o  --output --output-version --ports --replicas -t  --template --type"
+            else
+                opts=""
+            fi
+        ;;
+        "osadm registry")
+            if [[ "$cur" == -* ]];then
+                opts="--create --credentials --images --labels --latest-images --mount-host --no-headers -o  --output --output-version --ports --replicas -t  --template --type --volume"
+            else
+                opts=""
+            fi
+        ;;
+        "osadm build-chain")
+            if [[ "$cur" == -* ]];then
+                opts="--all --all-tags -o  --output"
+            else
+                opts=""
+            fi
+        ;;
+        "osadm config")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts="view set-cluster set-credentials set-context set unset use-context"
+            fi
+        ;;
+        "osadm config view")
+            if [[ "$cur" == -* ]];then
+                opts="--merge --no-headers -o  --output --output-version -t  --template"
+            else
+                opts=""
+            fi
+        ;;
+        "osadm config set-cluster")
+            if [[ "$cur" == -* ]];then
+                opts="--api-version --certificate-authority --embed-certs --insecure-skip-tls-verify --server"
+            else
+                opts=""
+            fi
+        ;;
+        "osadm config set-credentials")
+            if [[ "$cur" == -* ]];then
+                opts="--auth-path --client-certificate --client-key --embed-certs --password --token --username"
+            else
+                opts=""
+            fi
+        ;;
+        "osadm config set-context")
+            if [[ "$cur" == -* ]];then
+                opts="--cluster --namespace --user"
+            else
+                opts=""
+            fi
+        ;;
+        "osadm config set")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
+        "osadm config unset")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
+        "osadm config use-context")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
+        "osadm create-kubeconfig")
+            if [[ "$cur" == -* ]];then
+                opts="--certificate-authority --client-certificate --client-key --cluster --kubeconfig --master --public-master --user"
+            else
+                opts=""
+            fi
+        ;;
+        "osadm create-bootstrap-policy-file")
+            if [[ "$cur" == -* ]];then
+                opts="--filename --master-namespace --openshift-namespace"
+            else
+                opts=""
+            fi
+        ;;
+        "osadm overwrite-policy")
+            if [[ "$cur" == -* ]];then
+                opts="--filename -f  --force --master-config"
+            else
+                opts=""
+            fi
+        ;;
+        "osadm create-node-config")
+            if [[ "$cur" == -* ]];then
+                opts="--allow-disabled-docker --certificate-authority --client-certificate --client-key --dns-domain --dns-ip --hostnames --listen --master --network-container-image --node --node-client-certificate-authority --node-dir --server-certificate --server-key --signer-cert --signer-key --signer-serial --volume-dir"
+            else
+                opts=""
+            fi
+        ;;
+        "osadm create-master-certs")
+            if [[ "$cur" == -* ]];then
+                opts="--cert-dir --hostnames --master --overwrite --public-master --signer-name"
+            else
+                opts=""
+            fi
+        ;;
+        "osadm create-api-client-config")
+            if [[ "$cur" == -* ]];then
+                opts="--certificate-authority --client-dir --groups --master --public-master --signer-cert --signer-key --signer-serial --user"
+            else
+                opts=""
+            fi
+        ;;
+        "osadm create-server-cert")
+            if [[ "$cur" == -* ]];then
+                opts="--cert --hostnames --key --overwrite --signer-cert --signer-key --signer-serial"
+            else
+                opts=""
+            fi
+        ;;
+        "osadm create-signer-cert")
+            if [[ "$cur" == -* ]];then
+                opts="--cert --key --name --overwrite --serial"
+            else
+                opts=""
+            fi
+        ;;
+        "osadm version")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
+        "osadm help")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
         esac
         IFS=$SAVE_IFS
     fi
@@ -1086,26 +1299,42 @@ _osadm()
     return 0
 }
 
-complete -o default -F _osadm osadm
+    complete -o default -F _osadm osadm
 
-_openshift_deploy()
+
+
+_openshift-deploy()
 {
     local cur opts prev
     COMPREPLY=()
-    cur="${CPMP_WORDS[COMP_CWORD]}"
+    cur="${COMP_WORDS[COMP_CWORD]}"
     if [ $COMP_CWORD -eq 1 ]; then
         if [[ "$cur" == -* ]]; then
-            opts="--clean"
+            opts="--certificate-authority --client-certificate --client-key --deployment --insecure-skip-tls-verify --kubernetes --master --namespace --token"
         elif [ -z $cur ]; then
-            opts=""
+            opts="version help"
         else
-            opts=""
+            opts="version help"
         fi
     else
         prev="${COMP_WORDS[@]:0:COMP_CWORD}"
         SAVE_IFS=$IFS
         IFS=" "
         case "${prev[*]}" in
+        "openshift-deploy version")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
+        "openshift-deploy help")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
         esac
         IFS=$SAVE_IFS
     fi
@@ -1114,55 +1343,42 @@ _openshift_deploy()
     return 0
 }
 
-complete -o default -F _openshift-deploy openshift-deploy
+    complete -o default -F _openshift-deploy openshift-deploy
 
 
-_openshift-router()
-{
-    local cur opts prev
-    COMPREPLY=()
-    cur="${CPMP_WORDS[COMP_CWORD]}"
-    if [ $COMP_CWORD -eq 1 ]; then
-        if [[ "$cur" == -* ]]; then
-            opts="--clean"
-        elif [ -z $cur ]; then
-            opts=""
-        else
-            opts=""
-        fi
-    else
-        prev="${COMP_WORDS[@]:0:COMP_CWORD}"
-        SAVE_IFS=$IFS
-        IFS=" "
-        case "${prev[*]}" in
-        esac
-        IFS=$SAVE_IFS
-    fi
-
-    COMPREPLY=( $(compgen -W "${opts}" -- ${cur}))
-    return 0
-}
-
-complete -o default -F _openshift-router opensfhit-router
 
 _openshift-docker-build()
 {
     local cur opts prev
     COMPREPLY=()
-    cur="${CPMP_WORDS[COMP_CWORD]}"
+    cur="${COMP_WORDS[COMP_CWORD]}"
     if [ $COMP_CWORD -eq 1 ]; then
         if [[ "$cur" == -* ]]; then
-            opts="--clean"
+            opts=""
         elif [ -z $cur ]; then
-            opts=""
+            opts="version help"
         else
-            opts=""
+            opts="version help"
         fi
     else
         prev="${COMP_WORDS[@]:0:COMP_CWORD}"
         SAVE_IFS=$IFS
         IFS=" "
         case "${prev[*]}" in
+        "openshift-docker-build version")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
+        "openshift-docker-build help")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
         esac
         IFS=$SAVE_IFS
     fi
@@ -1171,27 +1387,42 @@ _openshift-docker-build()
     return 0
 }
 
-complete -o default -F _openshift-docker-build openshift-docker-build
+    complete -o default -F _openshift-docker-build openshift-docker-build
+
 
 
 _openshift-sti-build()
 {
     local cur opts prev
     COMPREPLY=()
-    cur="${CPMP_WORDS[COMP_CWORD]}"
+    cur="${COMP_WORDS[COMP_CWORD]}"
     if [ $COMP_CWORD -eq 1 ]; then
         if [[ "$cur" == -* ]]; then
-            opts="--clean"
+            opts=""
         elif [ -z $cur ]; then
-            opts=""
+            opts="version help"
         else
-            opts=""
+            opts="version help"
         fi
     else
         prev="${COMP_WORDS[@]:0:COMP_CWORD}"
         SAVE_IFS=$IFS
         IFS=" "
         case "${prev[*]}" in
+        "openshift-sti-build version")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
+        "openshift-sti-build help")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
         esac
         IFS=$SAVE_IFS
     fi
@@ -1200,4 +1431,7 @@ _openshift-sti-build()
     return 0
 }
 
-complete -o default -F _openshift-sti-build openshift-sti-build
+    complete -o default -F _openshift-sti-build openshift-sti-build
+
+
+
