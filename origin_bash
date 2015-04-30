@@ -45,9 +45,9 @@ _osc()
     cur="${CPMP_WORDS[COMP_CWORD]}"
     if [ $COMP_CWORD -eq 1 ]; then
         if [[ "$cur" == -* ]]; then
-            opts="--clean"
-        elif [ -z $cur ]; then
             opts=""
+        elif [ -z $cur ]; then
+            opts="login project new-app status start-build cancel-build build-logs rollback get describe create process update delete log exec port-forward proxy version config help"
         else
             opts=""
         fi
@@ -56,6 +56,202 @@ _osc()
         SAVE_IFS=$IFS
         IFS=" "
         case "${prev[*]}" in
+        "osc login")
+            if [[ "$cur" == -* ]];then
+                opts="-p  --password -u  --username --certificate-authority --context --insecure-skip-tls-verify --server"
+            else
+                opts=""
+            fi
+        ;;
+        "osc project")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
+        "osc new-app")
+            if [[ "$cur" == -* ]];then
+                opts="--build --code --docker-image -e  --env --group -i  --image --no-headers -o  --output --output-version -t  --template"
+            else
+                opts=""
+            fi
+        ;;
+        "osc status")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
+        "osc start-build")
+            if [[ "$cur" == -* ]];then
+                opts="--follow --from-build"
+            else
+                opts=""
+            fi
+        ;;
+        "osc cancel-build")
+            if [[ "$cur" == -* ]];then
+                opts="--dump-logs --restart"
+            else
+                opts=""
+            fi
+        ;;
+        "osc build-logs")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
+        "osc rollback")
+            if [[ "$cur" == -* ]];then
+                opts="--change-scaling-settings --change-strategy --change-triggers -d  --dry-run -o  --output -t  --template"
+            else
+                opts=""
+            fi
+        ;;
+        "osc get")
+            if [[ "$cur" == -* ]];then
+                opts="--no-headers -o  --output --output-version -l  --selector -t  --template -w  --watch --watch-only"
+            else
+                opts=""
+            fi
+        ;;
+        "osc describe")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
+        "osc create")
+            if [[ "$cur" == -* ]];then
+                opts="-f  --filename"
+            else
+                opts=""
+            fi
+        ;;
+        "osc process")
+            if [[ "$cur" == -* ]];then
+                opts="-f  --filename --no-headers -o  --output --output-version --parameters -t  --template -v  --value"
+            else
+                opts=""
+            fi
+        ;;
+        "osc update")
+            if [[ "$cur" == -* ]];then
+                opts="-f  --filename --patch"
+            else
+                opts=""
+            fi
+        ;;
+        "osc delete")
+            if [[ "$cur" == -* ]];then
+                opts="--all -f  --filename -l  --selector"
+            else
+                opts=""
+            fi
+        ;;
+        "osc log")
+            if [[ "$cur" == -* ]];then
+                opts="-f  --follow --interactive"
+            else
+                opts=""
+            fi
+        ;;
+        "osc exec")
+            if [[ "$cur" == -* ]];then
+                opts="-c  --container -p  --pod -i  --stdin -t  --tty"
+            else
+                opts=""
+            fi
+        ;;
+        "osc port-forward")
+            if [[ "$cur" == -* ]];then
+                opts="-p  --pod"
+            else
+                opts=""
+            fi
+        ;;
+        "osc proxy")
+            if [[ "$cur" == -* ]];then
+                opts="--api-prefix -p  --port -w  --www -P  --www-prefix"
+            else
+                opts=""
+            fi
+        ;;
+        "osc version")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
+        "osc config")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts="view set-cluster set-credentials set-context set unset use-context"
+            fi
+        ;;
+        "osc config view")
+            if [[ "$cur" == -* ]];then
+                opts="--merge --no-headers -o  --output --output-version -t  --template"
+            else
+                opts=""
+            fi
+        ;;
+        "osc config set-cluster")
+            if [[ "$cur" == -* ]];then
+                opts="--api-version --certificate-authority --embed-certs --insecure-skip-tls-verify --server"
+            else
+                opts=""
+            fi
+        ;;
+        "osc config set-credentials")
+            if [[ "$cur" == -* ]];then
+                opts="--auth-path --client-certificate --client-key --embed-certs --password --token --username"
+            else
+                opts=""
+            fi
+        ;;
+        "osc config set-context")
+            if [[ "$cur" == -* ]];then
+                opts="--cluster --namespace --user"
+            else
+                opts=""
+            fi
+        ;;
+        "osc config set")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
+        "osc config unset")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
+        "osc config use-context")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
+        "osc help")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
         esac
         IFS=$SAVE_IFS
     fi
