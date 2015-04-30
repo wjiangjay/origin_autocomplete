@@ -6,7 +6,7 @@ _openshift()
 {
     local cur opts prev
     COMPREPLY=()
-    cur="${CPMP_WORDS[COMP_CWORD]}"
+    cur="${COMP_WORDS[COMP_CWORD]}"
     if [ $COMP_CWORD -eq 1 ]; then
         if [[ "$cur" == -* ]]; then
             opts=""
