@@ -9,7 +9,7 @@ _openshift()
     cur="${CPMP_WORDS[COMP_CWORD]}"
     if [ $COMP_CWORD -eq 1 ]; then
         if [[ "$cur" == -* ]]; then
-            opts="--clean"
+            opts=""
         elif [ -z $cur ]; then
             opts="start admin cli kube ex version help"
         else
@@ -20,13 +20,811 @@ _openshift()
         SAVE_IFS=$IFS
         IFS=" "
         case "${prev[*]}" in
-            "openshift start")
-                if [[ "$cur" == -* ]]; then
-                    opts=""
-                else
-                    opts=""
-                fi
-            ;;
+        "openshift start")
+            if [[ "$cur" == -* ]];then
+                opts="--cert-dir --cors-allowed-origins --create-certs --create-policy-file --etcd --etcd-dir --hostname --images --kubeconfig --kubernetes --latest-images --listen --master --master-config --node-config --nodes --portal-net --public-kubernetes --public-master --volume-dir --write-config"
+            else
+                opts="master node"
+            fi
+        ;;
+        "openshift start master")
+            if [[ "$cur" == -* ]];then
+                opts="--cert-dir --config --cors-allowed-origins --create-certs --create-policy-file --etcd --etcd-dir --images --kubeconfig --kubernetes --latest-images --listen --master --nodes --portal-net --public-kubernetes --public-master --write-config"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift start node")
+            if [[ "$cur" == -* ]];then
+                opts="--cert-dir --config --create-certs --hostname --images --kubeconfig --kubernetes --latest-images --listen --volume-dir --write-config"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift admin")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts="new-project policy router registry build-chain config create-kubeconfig create-bootstrap-policy-file overwrite-policy create-node-config create-master-certs create-api-client-config create-server-cert create-signer-cert"
+            fi
+        ;;
+        "openshift admin new-project")
+            if [[ "$cur" == -* ]];then
+                opts="--admin --admin-role --description --display-name --master-policy-namespace"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift admin policy")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts="add-role-to-user remove-role-from-user remove-user add-role-to-group remove-role-from-group remove-group who-can"
+            fi
+        ;;
+        "openshift admin policy add-role-to-user")
+            if [[ "$cur" == -* ]];then
+                opts="--role-namespace"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift admin policy remove-role-from-user")
+            if [[ "$cur" == -* ]];then
+                opts="--role-namespace"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift admin policy remove-user")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
+        "openshift admin policy add-role-to-group")
+            if [[ "$cur" == -* ]];then
+                opts="--role-namespace"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift admin policy remove-role-from-group")
+            if [[ "$cur" == -* ]];then
+                opts="--role-namespace"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift admin policy remove-group")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
+        "openshift admin policy who-can")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
+        "openshift admin router")
+            if [[ "$cur" == -* ]];then
+                opts="--create --credentials --images --labels --latest-images --no-headers -o  --output --output-version --ports --replicas -t  --template --type"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift admin registry")
+            if [[ "$cur" == -* ]];then
+                opts="--create --credentials --images --labels --latest-images --mount-host --no-headers -o  --output --output-version --ports --replicas -t  --template --type --volume"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift admin build-chain")
+            if [[ "$cur" == -* ]];then
+                opts="--all --all-tags -o  --output"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift admin config")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts="view set-cluster set-credentials set-context set unset use-context"
+            fi
+        ;;
+        "openshift admin config view")
+            if [[ "$cur" == -* ]];then
+                opts="--merge --no-headers -o  --output --output-version -t  --template"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift admin config set-cluster")
+            if [[ "$cur" == -* ]];then
+                opts="--api-version --certificate-authority --embed-certs --insecure-skip-tls-verify --server"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift admin config set-credentials")
+            if [[ "$cur" == -* ]];then
+                opts="--auth-path --client-certificate --client-key --embed-certs --password --token --username"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift admin config set-context")
+            if [[ "$cur" == -* ]];then
+                opts="--cluster --namespace --user"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift admin config set")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
+        "openshift admin config unset")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
+        "openshift admin config use-context")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
+        "openshift admin create-kubeconfig")
+            if [[ "$cur" == -* ]];then
+                opts="--certificate-authority --client-certificate --client-key --cluster --kubeconfig --master --public-master --user"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift admin create-bootstrap-policy-file")
+            if [[ "$cur" == -* ]];then
+                opts="--filename --master-namespace --openshift-namespace"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift admin overwrite-policy")
+            if [[ "$cur" == -* ]];then
+                opts="--filename -f  --force --master-config"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift admin create-node-config")
+            if [[ "$cur" == -* ]];then
+                opts="--allow-disabled-docker --certificate-authority --client-certificate --client-key --dns-domain --dns-ip --hostnames --listen --master --network-container-image --node --node-client-certificate-authority --node-dir --server-certificate --server-key --signer-cert --signer-key --signer-serial --volume-dir"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift admin create-master-certs")
+            if [[ "$cur" == -* ]];then
+                opts="--cert-dir --hostnames --master --overwrite --public-master --signer-name"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift admin create-api-client-config")
+            if [[ "$cur" == -* ]];then
+                opts="--certificate-authority --client-dir --groups --master --public-master --signer-cert --signer-key --signer-serial --user"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift admin create-server-cert")
+            if [[ "$cur" == -* ]];then
+                opts="--cert --hostnames --key --overwrite --signer-cert --signer-key --signer-serial"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift admin create-signer-cert")
+            if [[ "$cur" == -* ]];then
+                opts="--cert --key --name --overwrite --serial"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift cli")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts="login project new-app status start-build cancel-build build-logs rollback get describe create process update delete log exec port-forward proxy config"
+            fi
+        ;;
+        "openshift cli login")
+            if [[ "$cur" == -* ]];then
+                opts="-p  --password -u  --username --certificate-authority --context --insecure-skip-tls-verify --server"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift cli project")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
+        "openshift cli new-app")
+            if [[ "$cur" == -* ]];then
+                opts="--build --code --docker-image -e  --env --group -i  --image --no-headers -o  --output --output-version -t  --template"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift cli status")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
+        "openshift cli start-build")
+            if [[ "$cur" == -* ]];then
+                opts="--follow --from-build"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift cli cancel-build")
+            if [[ "$cur" == -* ]];then
+                opts="--dump-logs --restart"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift cli build-logs")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
+        "openshift cli rollback")
+            if [[ "$cur" == -* ]];then
+                opts="--change-scaling-settings --change-strategy --change-triggers -d  --dry-run -o  --output -t  --template"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift cli get")
+            if [[ "$cur" == -* ]];then
+                opts="--no-headers -o  --output --output-version -l  --selector -t  --template -w  --watch --watch-only"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift cli describe")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
+        "openshift cli create")
+            if [[ "$cur" == -* ]];then
+                opts="-f  --filename"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift cli process")
+            if [[ "$cur" == -* ]];then
+                opts="-f  --filename --no-headers -o  --output --output-version --parameters -t  --template -v  --value"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift cli update")
+            if [[ "$cur" == -* ]];then
+                opts="-f  --filename --patch"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift cli delete")
+            if [[ "$cur" == -* ]];then
+                opts="--all -f  --filename -l  --selector"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift cli log")
+            if [[ "$cur" == -* ]];then
+                opts="-f  --follow --interactive"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift cli exec")
+            if [[ "$cur" == -* ]];then
+                opts="-c  --container -p  --pod -i  --stdin -t  --tty"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift cli port-forward")
+            if [[ "$cur" == -* ]];then
+                opts="-p  --pod"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift cli proxy")
+            if [[ "$cur" == -* ]];then
+                opts="--api-prefix -p  --port -w  --www -P  --www-prefix"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift cli config")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts="view set-cluster set-credentials set-context set unset use-context"
+            fi
+        ;;
+        "openshift cli config view")
+            if [[ "$cur" == -* ]];then
+                opts="--merge --no-headers -o  --output --output-version -t  --template"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift cli config set-cluster")
+            if [[ "$cur" == -* ]];then
+                opts="--api-version --certificate-authority --embed-certs --insecure-skip-tls-verify --server"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift cli config set-credentials")
+            if [[ "$cur" == -* ]];then
+                opts="--auth-path --client-certificate --client-key --embed-certs --password --token --username"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift cli config set-context")
+            if [[ "$cur" == -* ]];then
+                opts="--cluster --namespace --user"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift cli config set")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
+        "openshift cli config unset")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
+        "openshift cli config use-context")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
+        "openshift kube")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts="get describe create update delete namespace log rollingupdate resize exec port-forward proxy run-container stop expose label config clusterinfo apiversions version"
+            fi
+        ;;
+        "openshift kube get")
+            if [[ "$cur" == -* ]];then
+                opts="--no-headers -o  --output --output-version -l  --selector -t  --template -w  --watch --watch-only"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift kube describe")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
+        "openshift kube create")
+            if [[ "$cur" == -* ]];then
+                opts="-f  --filename"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift kube update")
+            if [[ "$cur" == -* ]];then
+                opts="-f  --filename --patch"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift kube delete")
+            if [[ "$cur" == -* ]];then
+                opts="--all -f  --filename -l  --selector"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift kube namespace")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
+        "openshift kube log")
+            if [[ "$cur" == -* ]];then
+                opts="-f  --follow --interactive"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift kube rollingupdate")
+            if [[ "$cur" == -* ]];then
+                opts="-f  --filename --poll-interval --timeout --update-period"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift kube resize")
+            if [[ "$cur" == -* ]];then
+                opts="--current-replicas --replicas --resource-version"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift kube exec")
+            if [[ "$cur" == -* ]];then
+                opts="-c  --container -p  --pod -i  --stdin -t  --tty"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift kube port-forward")
+            if [[ "$cur" == -* ]];then
+                opts="-p  --pod"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift kube proxy")
+            if [[ "$cur" == -* ]];then
+                opts="--api-prefix -p  --port -w  --www -P  --www-prefix"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift kube run-container")
+            if [[ "$cur" == -* ]];then
+                opts="--dry-run --generator --image -l  --labels --no-headers -o  --output --output-version --overrides --port -r  --replicas -t  --template"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift kube stop")
+            if [[ "$cur" == -* ]];then
+                opts="--all -f  --filename -l  --selector"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift kube expose")
+            if [[ "$cur" == -* ]];then
+                opts="--container-port --create-external-load-balancer --dry-run --generator -l  --labels --no-headers -o  --output --output-version --overrides --port --protocol --public-ip --selector --service-name -t  --template"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift kube label")
+            if [[ "$cur" == -* ]];then
+                opts="--all --no-headers -o  --output --output-version --overwrite --resource-version -l  --selector -t  --template"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift kube config")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts="view set-cluster set-credentials set-context set unset use-context"
+            fi
+        ;;
+        "openshift kube config view")
+            if [[ "$cur" == -* ]];then
+                opts="--merge --no-headers -o  --output --output-version -t  --template"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift kube config set-cluster")
+            if [[ "$cur" == -* ]];then
+                opts="--api-version --certificate-authority --embed-certs --insecure-skip-tls-verify --server"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift kube config set-credentials")
+            if [[ "$cur" == -* ]];then
+                opts="--auth-path --client-certificate --client-key --embed-certs --password --token --username"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift kube config set-context")
+            if [[ "$cur" == -* ]];then
+                opts="--cluster --namespace --user"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift kube config set")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
+        "openshift kube config unset")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
+        "openshift kube config use-context")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
+        "openshift kube clusterinfo")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
+        "openshift kube apiversions")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
+        "openshift kube version")
+            if [[ "$cur" == -* ]];then
+                opts="-c  --client"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift ex")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts="new-project config tokens policy generate router registry build-chain"
+            fi
+        ;;
+        "openshift ex new-project")
+            if [[ "$cur" == -* ]];then
+                opts="--admin --admin-role --description --display-name --master-policy-namespace"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift ex config")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts="view set-cluster set-credentials set-context set unset use-context"
+            fi
+        ;;
+        "openshift ex config view")
+            if [[ "$cur" == -* ]];then
+                opts="--merge --no-headers -o  --output --output-version -t  --template"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift ex config set-cluster")
+            if [[ "$cur" == -* ]];then
+                opts="--api-version --certificate-authority --embed-certs --insecure-skip-tls-verify --server"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift ex config set-credentials")
+            if [[ "$cur" == -* ]];then
+                opts="--auth-path --client-certificate --client-key --embed-certs --password --token --username"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift ex config set-context")
+            if [[ "$cur" == -* ]];then
+                opts="--cluster --namespace --user"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift ex config set")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
+        "openshift ex config unset")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
+        "openshift ex config use-context")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
+        "openshift ex tokens")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts="validate-token request-token whoami"
+            fi
+        ;;
+        "openshift ex tokens validate-token")
+            if [[ "$cur" == -* ]];then
+                opts="--token"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift ex tokens request-token")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
+        "openshift ex tokens whoami")
+            if [[ "$cur" == -* ]];then
+                opts="--token"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift ex policy")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts="add-role-to-user remove-role-from-user remove-user add-role-to-group remove-role-from-group remove-group who-can"
+            fi
+        ;;
+        "openshift ex policy add-role-to-user")
+            if [[ "$cur" == -* ]];then
+                opts="--role-namespace"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift ex policy remove-role-from-user")
+            if [[ "$cur" == -* ]];then
+                opts="--role-namespace"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift ex policy remove-user")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
+        "openshift ex policy add-role-to-group")
+            if [[ "$cur" == -* ]];then
+                opts="--role-namespace"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift ex policy remove-role-from-group")
+            if [[ "$cur" == -* ]];then
+                opts="--role-namespace"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift ex policy remove-group")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
+        "openshift ex policy who-can")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
+        "openshift ex generate")
+            if [[ "$cur" == -* ]];then
+                opts="--builder-image --docker-context -e  --environment --name --no-headers -o  --output --output-version -p  --port --ref --source-url -t  --template"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift ex router")
+            if [[ "$cur" == -* ]];then
+                opts="--create --credentials --images --labels --latest-images --no-headers -o  --output --output-version --ports --replicas -t  --template --type"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift ex registry")
+            if [[ "$cur" == -* ]];then
+                opts="--create --credentials --images --labels --latest-images --mount-host --no-headers -o  --output --output-version --ports --replicas -t  --template --type --volume"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift ex build-chain")
+            if [[ "$cur" == -* ]];then
+                opts="--all --all-tags -o  --output"
+            else
+                opts=""
+            fi
+        ;;
+        "openshift version")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
+        "openshift help")
+            if [[ "$cur" == -* ]];then
+                opts=""
+            else
+                opts=""
+            fi
+        ;;
         esac
         IFS=$SAVE_IFS
     fi
