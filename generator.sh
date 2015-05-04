@@ -22,20 +22,21 @@ _process_function()
 
 
     if [[ $command == $cmd ]];then
-            $(cat >> $output <<EOF
-    if [ \$COMP_CWORD -eq 1 ]; then
-        if [[ "\$cur" == -* ]]; then
+            `cat >> $output <<EOF
+    if [ \\$COMP_CWORD -eq 1 ]; then
+        if [[ "\\$cur" == -* ]]; then
             opts="$(_display ${valid_options[*]})"
-        elif [ -z \$cur ]; then
+        elif [ -z \\$cur ]; then
             opts="$(_display ${valid_commands[*]})"
         else
             opts="$(_display ${valid_commands[*]})"
         fi
     else
-        prev="\${COMP_WORDS[@]:0:COMP_CWORD}"
-        SAVE_IFS=\$IFS
+        prev="\\${COMP_WORDS[@]:0:COMP_CWORD}"
+        SAVE_IFS=\\$IFS
         IFS=" "
-        case "\${prev[*]}" in)
+        case "\\${prev[*]}" in
+EOF`
     else
         `cat >> $output <<EOF
         "$command")
@@ -44,7 +45,8 @@ _process_function()
             else
                 opts="$(_display ${valid_commands[*]})"
             fi
-        ;;`
+        ;;
+EOF`
     fi
 
     if [[ $valid_commands != "" ]];
@@ -69,26 +71,26 @@ else
     if [[ $# -le 1 ]];then
         echo "Do not give enough arguments."
     else
-        $(cat >> $output <<EOF
+        `cat >> $output <<EOF
 _${cmd}()
 {
     local cur opts prev
     COMPREPLY=()
-    cur="\${COMP_WORDS[COMP_CWORD]}")
+    cur="\\${COMP_WORDS[COMP_CWORD]}"
+EOF`
         _process_function $1
-    $(cat >> $output <<EOF
+    `cat >> $output <<EOF
         esac
-        IFS=\$SAVE_IFS
+        IFS=\\$SAVE_IFS
     fi
 
-    COMPREPLY=( \$(compgen -W "\${opts}" -- \${cur}))
+    COMPREPLY=( \\$(compgen -W "\\${opts}" -- \\${cur}))
     return 0
 }
 
     complete -o default -F _${cmd} ${cmd}
 
 
-
-)
+EOF`
     fi
 fi
